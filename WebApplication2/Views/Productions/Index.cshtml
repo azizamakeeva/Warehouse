@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WebApplication2.Models.Production>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Продукция</h1>
+
+<p>
+    <a asp-action="Create">Создать новую запись</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <p>Количество</p>
+            </th>
+            <th>
+                <p>Дата</p>
+            </th>
+            <th>
+                <p>Сотрудник</p>
+            </th>
+            <th>
+                <p>Продукция</p>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeNavigation.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductNavigation.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

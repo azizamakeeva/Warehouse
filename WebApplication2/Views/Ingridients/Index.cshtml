@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebApplication2.Models.Ingridient>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Ингредиенты</h1>
+@using (Html.BeginForm())
+{
+<p>
+    <input type="text" name="search_item" />
+    @*@Html.DropDownList("search_item", ViewBag.Prod as SelectList)*@
+
+    <input type="submit" value="Поиск" class="btn btn-dark" />
+</p>
+    <p>
+        <a asp-action="Create">Создать новую запись</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>
+                    <p>Продукция</p>
+                </th>
+                <th>
+                    <p>Сырье</p>
+                </th>
+                <th>
+                    <p>Количество</p>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductsNavigation.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RawMaterialsNavigation.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Count)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
